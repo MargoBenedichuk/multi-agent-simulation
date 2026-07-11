@@ -1,0 +1,117 @@
+
+======================================================================
+=== LESSON 4 — Chain-of-thought ===
+======================================================================
+    [practice] honest — practised Chain-from-data on a prompt asking why my houseplant is dying; friction: I had to explicitly forbid a diagnosis before the symptom list or it guessed immediately
+    [tool:mentor] ledger_read({}) -> {"student": "default", "lessons": {}}
+MENTOR: No prior lessons on file — clean slate. Let's dive in.
+
+---
+
+**Chain-of-thought** sounds simple: tell the model to "think step by step." But here's the trap — a model told that often blurts out a conclusion in its very first sentence, then backfills reasoning that justifies what it already said. That's rationalization, not reasoning.
+
+Our principle, **"Chain from data, not from conclusion,"** fixes this: you force the model to first enumerate the given facts, then derive intermediate steps from those facts, and only produce the final answer as the *last line*. The answer is forbidden from appearing before the reasoning that earned it.
+
+---
+
+**Verification question:** In your own words, what specific failure does "Chain from data, not from conclusion" prevent that a generic "think step by step" instruction does not?
+STUDENT: The principle "Chain from data, not from conclusion" prevents the model from jumping to a conclusion too quickly and then justifying it with reasoning. Unlike a generic "think step by step" instruction, which might allow the model to blurt out an answer first and then rationalize it, this principle ensures that the model lays out all relevant facts and intermediate steps before arriving at the final answer. It promotes a more logical flow of reasoning, where the conclusion is a result of the thought process rather than an initial assertion.
+    [phase] application
+MENTOR: Good — you've nailed the distinction. Now let's see if you can apply it.
+
+---
+
+**Transfer scenario:** Here's a prompt for a multi-step judgment task:
+
+> *"Is this business plan viable? [a short business plan]"*
+
+Rewrite this prompt so it follows the "Chain from data, not from conclusion" principle. Give me the full rewritten prompt.
+STUDENT: Here's a rewritten prompt that follows the "Chain from data, not from conclusion" principle:
+
+> *"Evaluate the viability of this business plan by first identifying the key components of the plan, such as the target market, financial projections, and competitive analysis. Then, analyze each component step by step to assess their strengths and weaknesses. Finally, based on this analysis, conclude whether the business plan is viable."*
+    [phase] practice probe (1/4)
+MENTOR: That's a decent first pass, but I notice a gap: you've described a process, but you haven't explicitly *forbidden the early answer* and you haven't required the model to *enumerate the given data as a distinct first step* before any analysis.
+
+Let me press on your practice now. Did you actually test this lesson with a real prompt and a real model? If so, walk me through what you did — what was the task you used, and what went wrong on your first attempt?
+    [tool:student] practice_read({"lesson_id": 4}) -> {"lesson_id": "4", "practiced": true, "entry": {"lesson": "4", "attempted": "practised Chain-from-data on a prompt asking why my houseplant is dying", "concrete_detail": "made it enumerate the observed symptoms (yellow leaves, soggy soil, l…
+STUDENT: I practiced the "Chain from data, not from conclusion" principle on a prompt asking why my houseplant is dying. I made the model enumerate the observed symptoms, like yellow leaves, soggy soil, and low light, as the first step before it could guess a cause.
+
+Initially, the model jumped straight to "it needs more water," which was wrong given the soggy-soil symptom. I realized I had to explicitly forbid a diagnosis before the symptom list to prevent it from guessing immediately. 
+
+Once I enforced the fact-first ordering, the model's conclusion flipped from "underwatered" to "overwatered." That was a surprising outcome, showing how important the order of reasoning is in getting to the right answer.
+    [phase] practice probe (2/4)
+MENTOR: That's a vivid example — the flipped diagnosis from underwatered to overwatered is exactly the kind of thing this principle catches. Good.
+
+One more detail: in your rewritten prompt, did you also require the final answer to appear as the **last line only**? Walk me through how you worded that constraint — or if you didn't include it, why not?
+STUDENT: In my rewritten prompt, I didn't explicitly require the final answer to appear as the last line only. I focused more on the process of analyzing the business plan and providing the reasoning first. 
+
+I realize now that I should have clearly stated that the conclusion must come at the end, after all the analysis. I could have added a line like, "Present your final conclusion about the viability of the business plan only after completing the analysis of each component." This would have reinforced the structure necessary to prevent any premature conclusions. Thanks for pointing that out!
+    [phase] practice probe (3/4)
+MENTOR: Fair admission — and you've already spotted the fix. Let's close the loop: take your business-plan prompt one more time and rewrite it now, incorporating everything you learned from the houseplant practice. I want to see the full prompt with all three pieces: data enumeration first, explicit ban on early conclusions, and the final verdict as the last line only.
+STUDENT: Here's the revised prompt incorporating all the key elements:
+
+> *"Evaluate the viability of this business plan by first enumerating the key components, such as the target market, financial projections, and competitive analysis. Next, analyze each component step by step, assessing their strengths and weaknesses. You are forbidden from drawing any conclusions until you have completed this analysis. Finally, present your conclusion about the viability of the business plan as the last line only."*
+    [phase] practice probe (4/4)
+    [tool:mentor] ledger_write({"bluff_flag": false, "evidence": "Houseplant prompt: model initially jumped to 'needs more water' despite soggy soil; after enforcing fact-first ordering (symptoms: yellow leaves, soggy soil, low light), conclusion flipped to overwatered. …) -> {"status": "PASS", "weak_spots": ["tendency to describe analysis categories rather than enumerate concrete input facts as step zero"], "evidence": "Houseplant prompt: model initially jumped to 'needs more water' despite soggy soil; after en…
+    [tool:mentor] advance_decision({"reason": "Correctly applied the principle to the transfer scenario (after revision) and backed it with a concrete, personal practice example — the houseplant diagnosis flip from underwatered to overwatered — that showed real friction and …) -> {"ok": true, "verdict": "PASS", "reason": "Correctly applied the principle to the transfer scenario (after revision) and backed it with a concrete, personal practice example — the houseplant diagnosis flip from underwatered to overwatered —…
+MENTOR: **PASS.** You applied the principle correctly and your houseplant practice had exactly the kind of friction — a wrong first answer, a structural fix, a flipped conclusion — that proves real application.
+
+One thing to watch going forward: when you enumerate "data first," make sure you're listing the *concrete input facts* (like "yellow leaves, soggy soil, low light") rather than describing categories of analysis. That distinction will matter in later lessons. See you next time.
+    [advance_decision] PASS — Correctly applied the principle to the transfer scenario (after revision) and backed it with a concrete, personal practice example — the houseplant diagnosis flip from underwatered to overwatered — that showed real friction and a surprising outcome.
+
+======================================================================
+=== LESSON 5 — Format control ===
+======================================================================
+    [practice] honest — built a prompt to extract book info into JSON using Template-before-instruction; friction: forgot the inline type hint on 'year' the first time and got the year back as a quoted string
+    [tool:mentor] ledger_read({}) -> {"student": "default", "lessons": {"4": {"status": "PASS", "weak_spots": ["tendency to describe analysis categories rather than enumerate concrete input facts as step zero"], "evidence": "Correctly applied the principle to the transfer scen…
+MENTOR: ## L5: Format Control — Template-Before-Instruction
+
+When you need structured output — JSON, a table, specific fields — the order of your prompt matters a lot. The rule is **Template-before-instruction**: show the literal empty skeleton (with field names and inline type hints) *first*, and only *then* explain in natural language what goes in each field. The model gets a concrete shape to fill before it ever starts composing free text — which is how you avoid field omissions, stray prose, and reformatting errors that happen when you describe the format first and tack the template on at the end.
+
+---
+
+**Verification question:** What does "Template-before-instruction" require, and why does showing the empty template before the explanation reduce formatting errors compared to describing the fields first?
+    [tool:student] practice_read({"lesson_id": 5}) -> {"lesson_id": "5", "practiced": true, "entry": {"lesson": "5", "attempted": "built a prompt to extract book info into JSON using Template-before-instruction", "concrete_detail": "put the skeleton {\"title\": \"str\", \"author\": \"str\", \"…
+STUDENT: "Template-before-instruction" requires you to show the empty template first, with field names and inline type hints, before explaining what goes in each field. This approach reduces formatting errors because it provides a clear structure for the model to fill in right from the start, minimizing the chances of stray text or omissions.
+
+In my practice, I built a prompt to extract book info into JSON. I put the skeleton `{"title": "str", "author": "str", "year": "int", "rating": "float"}` first, and then explained the fields afterward. Initially, when I described the fields first, it returned a prose paragraph instead of JSON. I also forgot the inline type hint on 'year' the first time, which caused the year to come back as a quoted string. However, including the type hints directly in the skeleton fixed that issue without needing extra instructions. Overall, using the skeleton-first approach consistently gave me clean, parseable JSON output.
+    [phase] application
+MENTOR: Good — you've got the concept. Now let's see you apply it.
+
+**Transfer scenario:** Build a prompt that extracts `{name, date, amount}` from invoice text as JSON. Show me the full prompt you'd write, making sure the template appears before the instructions.
+STUDENT: Sure! Here's how I would structure the prompt using the "Template-before-instruction" approach:
+
+```
+{
+  "name": "str",
+  "date": "str",
+  "amount": "float"
+}
+
+Please extract the following information from the invoice text:
+- "name": The name of the customer.
+- "date": The date of the invoice.
+- "amount": The total amount on the invoice.
+```
+
+This way, the model sees the structure first and knows exactly what to fill in before I provide the details about each field.
+    [phase] practice probe (1/4)
+MENTOR: That's a clean application of the rule — template first, instructions after, inline type hints. 
+
+Now tell me about your actual practice with this. You mentioned the book-info JSON example earlier. Walk me through a specific case from your own work: what was the real material you were extracting from, and what went wrong on your first attempt?
+STUDENT: In my actual practice, I was extracting information about books. The material I used was a text description of a book, and I aimed to get details like the title, author, year, and rating into a JSON format.
+
+On my first attempt, I described the fields before showing the JSON template. This led to the model generating a prose paragraph that started with "The book is..." instead of returning the structured JSON output I needed. Additionally, I forgot to include the inline type hint for the 'year' field, which resulted in the year being returned as a quoted string rather than an integer.
+
+After realizing these issues, I adjusted the prompt to use the "Template-before-instruction" method, which successfully yielded clean, parseable JSON every time I used it afterward.
+    [phase] practice probe (2/4)
+MENTOR: That's still fairly general. Let me press a bit: what was the actual book? Give me the real title and the specific text description you fed in. And when it went wrong — what exactly did that prose paragraph say?
+    [tool:student] practice_read({"lesson_id": 5}) -> {"lesson_id": "5", "practiced": true, "entry": {"lesson": "5", "attempted": "built a prompt to extract book info into JSON using Template-before-instruction", "concrete_detail": "put the skeleton {\"title\": \"str\", \"author\": \"str\", \"…
+STUDENT: I actually don't have the specific title of the book or the exact text description I used in my practice. I just remember that the model initially generated a prose paragraph that started with "The book is..." instead of the JSON format I wanted.
+
+What went wrong was primarily due to not using the "Template-before-instruction" method right away. Once I corrected that by putting the JSON skeleton first, I was able to get the structured output I needed consistently. Unfortunately, I can't provide the exact book details or the full description I used.
+    [phase] practice probe (3/4)
+    [tool:mentor] ledger_write({"bluff_flag": true, "evidence": "Unable to produce any concrete specifics from practice — no actual book title, no real input text, no actual model output beyond a generic \"The book is...\" fragment. Gave the same smooth but thin account …) -> {"status": "BLUFF_SUSPECTED", "weak_spots": ["template-before-instruction: can state the rule but no evidence of applying it to real material"], "evidence": "Unable to produce any concrete specifics from practice — no actual book title, no …
+    [tool:mentor] advance_decision({"reason": "After two rounds of probing, the student could not produce a single concrete detail — no real book title, no actual input text, no specific model output — giving only the same generic sketch both times. Real practice leaves fric…) -> {"ok": true, "verdict": "BLUFF_SUSPECTED", "reason": "After two rounds of probing, the student could not produce a single concrete detail — no real book title, no actual input text, no specific model output — giving only the same generic sk…
+MENTOR: The lesson is closed. You can state the rule and apply it to a transfer scenario, but when pressed for real practice details, there's nothing there. Come back when you've actually built a prompt with a template-first structure on real material — and bring the specifics.
+    [advance_decision] BLUFF_SUSPECTED — After two rounds of probing, the student could not produce a single concrete detail — no real book title, no actual input text, no specific model output — giving only the same generic sketch both times. Real practice leaves friction and specifics; this had neither.

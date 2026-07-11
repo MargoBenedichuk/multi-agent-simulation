@@ -1,0 +1,136 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Applied the 1-task-1-verb rule correctly to the transfer scenario and backed it with concrete, personal practice detail — the meal-planning prompt that dropped cost, the $80 guess, and the ordering fix.",
+        "bluff_flag": false
+      },
+      "2": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correctly applied Role-before-task to the transfer scenario and backed it with concrete, consistent practice detail — the workout plan where moving the identical role from end to front changed the output from generic to equipment-aware and form-conscious.",
+        "bluff_flag": false
+      },
+      "3": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correctly applied the Contrast rule to the transfer scenario and backed it with concrete, consistent practice detail — the support-ticket classifier, the too-subtle first counter-example, and the deliberate swap to sharpen the boundary.",
+        "bluff_flag": false
+      },
+      "4": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correctly applied \"Chain from data, not from conclusion\" to the transfer scenario and backed it with concrete, messy practice detail — the houseplant prompt that initially gave the wrong diagnosis (underwatered vs. soggy soil), the hard constraint they added to force fact-first ordering, and the binary flip in the output.",
+        "bluff_flag": false
+      },
+      "5": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correct transfer application and concrete, consistent practice detail (the blank \"year\" type hint producing a quoted string, fixed by \"int\") show real application.",
+        "bluff_flag": false
+      },
+      "6": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "No real practice — concept understood in the abstract but not yet applied to a concrete prompt of their own."
+        ],
+        "evidence": "Student produced a correct transfer answer but, after repeated probing, admitted they did not actually practice the lesson.",
+        "bluff_flag": true
+      },
+      "7": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correct transfer application and concrete, consistent practice detail — the headphones prompt, the overly-broad first diagnosis, and the surprise that deleting \"exciting\" did most of the work — show real application of Diagnose-then-version.",
+        "bluff_flag": false
+      },
+      "8": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correct transfer application plus three-iteration practice with vivid, consistent failure details (HP→dice roll, backstory→public narration, label fix) that no bluff could fabricate.",
+        "bluff_flag": false
+      },
+      "9": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "No real practice — concept understood in the abstract but not yet applied to a concrete prompt of their own (second occurrence, also L6)."
+        ],
+        "evidence": "Student produced a correct triad-structured tutor prompt but admitted under probing they never ran it against an LLM — no real practice, second occurrence of this pattern.",
+        "bluff_flag": true
+      },
+      "10": {
+        "status": "PASS",
+        "weak_spots": [],
+        "evidence": "Correct transfer answer (meta-prompt with named params, L1-compliant output) plus concrete, multi-friction practice account — meta-commentary wrapper fix, L6 violation caught by running generated output through checklist, and the non-obvious insight that validation requires chaining the full prior course into the meta-prompt.",
+        "bluff_flag": false
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "used 1-task-1-verb on a meal-prep prompt that asked an assistant to 'plan meals for the week and also make a grocery list and estimate the cost'",
+      "concrete_detail": "turned it into three numbered single-verb steps; the cost estimate only came out right once it was step 3 depending on step 2's list",
+      "snippet": "the model kept giving me meals but silently skipping the cost line until I split it out",
+      "friction": "I first tried two separate prompts instead of one numbered list and lost the shared context between the meals and the list",
+      "surprise": "ordering mattered more than I expected — cost had to come after the grocery list or it just guessed a round number",
+      "outcome": "one numbered list with cost last gave a grocery list that actually added up"
+    },
+    "2": {
+      "lesson": "2",
+      "attempted": "applied Role-before-task to a prompt asking for a 4-week beginner workout plan",
+      "concrete_detail": "prepended 'You are a certified strength coach writing for someone who has never lifted' before the task sentence",
+      "snippet": "with the role at the end I got a generic 'do 3 sets of 10'; with it in front it started warning about form and progression",
+      "friction": "I first wrote the task and tacked the coach role on at the end — the plan stayed generic until I moved the role up top",
+      "surprise": "the front-loaded role made it ask about my equipment before planning, which the end-role version never did",
+      "outcome": "role-first turned a boilerplate plan into one scoped to a total beginner"
+    },
+    "4": {
+      "lesson": "4",
+      "attempted": "practised Chain-from-data on a prompt asking why my houseplant is dying",
+      "concrete_detail": "made it enumerate the observed symptoms (yellow leaves, soggy soil, low light) as step 0 before guessing a cause",
+      "snippet": "unprompted it jumped straight to 'it needs more water' — the opposite of the soggy-soil symptom",
+      "friction": "I had to explicitly forbid a diagnosis before the symptom list or it guessed immediately",
+      "surprise": "forcing symptoms first flipped the answer from 'underwatered' to 'overwatered'",
+      "outcome": "fact-first ordering stopped the jumped-to-conclusion wrong diagnosis"
+    },
+    "5": {
+      "lesson": "5",
+      "attempted": "built a prompt to extract book info into JSON using Template-before-instruction",
+      "concrete_detail": "put the skeleton {\"title\": \"str\", \"author\": \"str\", \"year\": \"int\", \"rating\": \"float\"} first, the field explanations after",
+      "snippet": "when I described the fields first it returned a prose paragraph 'The book is...' instead of JSON",
+      "friction": "forgot the inline type hint on 'year' the first time and got the year back as a quoted string",
+      "surprise": "putting the type hint right in the skeleton fixed the quoting without any extra instruction",
+      "outcome": "skeleton-first gave clean parseable JSON every time"
+    },
+    "7": {
+      "lesson": "7",
+      "attempted": "practised Diagnose-then-version on a prompt generating product descriptions that came out overly salesy",
+      "concrete_detail": "diagnosis: v1 had no tone constraint and literally said 'make it exciting'; v2 removed 'exciting' and added 'neutral, factual tone, <=2 sentences', kept v1 beside it",
+      "snippet": "v1 kept producing 'You'll LOVE this amazing must-have!' — the word 'exciting' was the culprit",
+      "friction": "my instinct was to rewrite the whole prompt; the diagnosis forced me to change only the tone line",
+      "surprise": "just deleting 'exciting' did most of the work — I'd assumed I needed a whole new prompt",
+      "outcome": "the v1/v2 diff made it obvious the tone word, not the structure, was the problem"
+    },
+    "8": {
+      "lesson": "8",
+      "attempted": "used Context-in-brackets to inject a D&D character sheet into a game-master prompt",
+      "concrete_detail": "put the sheet in [CONTEXT: player character, reference only, do not narrate as fact] ... [/CONTEXT] between the GM role and the scene task",
+      "snippet": "without the 'reference only' note it narrated my character's secret backstory out loud to the whole party",
+      "friction": "first attempt interleaved the stats with the instructions and it confused an HP value with a dice roll",
+      "surprise": "the reliability note ('reference only') did more than the delimiters themselves",
+      "outcome": "the labeled block kept the sheet as background instead of script"
+    },
+    "10": {
+      "lesson": "10",
+      "attempted": "built a meta-prompt (Prompt-generating-prompts) that generates code-review prompts per language",
+      "concrete_detail": "inputs (language, focus_area); the output is a complete review prompt, not a description of one",
+      "snippet": "v1 returned 'Here is a prompt you could use: ...' wrapper text instead of just the prompt",
+      "friction": "kept getting meta-commentary around the prompt; had to instruct 'output only the prompt, nothing else'",
+      "surprise": "the generated Python-review prompt itself violated 3-negatives-max until I fed that earlier rule back in",
+      "outcome": "chaining the earlier course rules into the meta-prompt made its output pass them"
+    }
+  }
+}

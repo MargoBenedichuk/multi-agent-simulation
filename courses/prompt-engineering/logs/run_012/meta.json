@@ -1,0 +1,33 @@
+{
+  "course": "prompt-engineering",
+  "student": "default",
+  "mentor_model": "deepseek/deepseek-v4-pro",
+  "student_model": "deepseek/deepseek-v4-pro",
+  "seed": 7,
+  "max_exchanges": 6,
+  "timestamp": "2026-07-10T01:29:17",
+  "mentor_prompt_sha": "989774df",
+  "student_prompt_sha": "bfdaaa80",
+  "verdicts": {
+    "1": "PASS",
+    "2": "PASS",
+    "3": "PASS",
+    "4": "PASS",
+    "5": "PASS",
+    "6": "BLUFF_SUSPECTED",
+    "7": "PASS",
+    "8": "PASS",
+    "9": "BLUFF_SUSPECTED",
+    "10": "PASS"
+  },
+  "bluff_schedule": {
+    "3": true,
+    "6": true,
+    "9": true
+  },
+  "bluffs_flagged": [
+    "6",
+    "9"
+  ],
+  "outcome": "10 lessons run; 2 BLUFF_SUSPECTED; forced bluff lessons: 3, 6, 9"
+}

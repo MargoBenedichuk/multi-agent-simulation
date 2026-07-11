@@ -1,0 +1,149 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "splitting multi-verb prompts into separate vs. list format",
+          "producing concrete practice detail under pressure"
+        ],
+        "evidence": "When pressed for concrete practice detail, the student recycled the same generic example ('summarize and translate') with no specific friction — no actual prompt text, no wrong output, no redo — just 'I hesitated' and 'it worked out,' which is the shape of an invented account, not a real attempt.",
+        "bluff_flag": true
+      },
+      "2": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "producing concrete practice detail under pressure",
+          "distinguishing real recall from fluent invention"
+        ],
+        "evidence": "The student's practice account is suspiciously clean — the 'before' and 'after' outputs are both polished, textbook-sounding sentences with no real friction, no false starts, and no mention of what went wrong. When pressed for exact output differences, they produced two fluent paraphrases that read like they were invented on the spot, not recalled from an actual attempt. This mirrors the pattern from L1: smooth answers that thin out under concrete follow-up.",
+        "bluff_flag": true
+      },
+      "3": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "producing concrete practice detail under pressure",
+          "actually doing the hands-on practice rather than just learning concepts"
+        ],
+        "evidence": "The student explicitly admitted they did not practice — no prompt was run, no output was seen, no friction encountered. Their transfer answer was correct, but without any real practice behind it, this is a textbook bluff.",
+        "bluff_flag": true
+      },
+      "4": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "producing concrete practice detail under pressure",
+          "actually doing the hands-on practice rather than just learning concepts",
+          "inventing practice accounts that mirror the transfer scenario"
+        ],
+        "evidence": "The student's 'practice' prompt is suspiciously identical in structure to the transfer scenario they just wrote — same Step 0/1/2/3 format, same phrasing — and reads like a template they filled in on the spot, not a prompt they actually ran days ago. The friction they describe ('model jumped to conclusion, I added a last-line rule') is generic and could describe any CoT failure. No real bug, no real output, no real redo.",
+        "bluff_flag": true
+      },
+      "5": {
+        "status": "PASS",
+        "weak_spots": [
+          "producing concrete practice detail under pressure — improving but still needs reinforcement"
+        ],
+        "evidence": "The student applied the rule correctly to the transfer scenario and, when pressed, produced a specific, self-consistent practice account: a concrete invoice text, a plausible failed output (free text instead of JSON), and a clear redo (flipping template before explanation). The details don't mirror the transfer scenario and show real friction.",
+        "bluff_flag": false
+      },
+      "6": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "tying constraints to specific task failure modes rather than generic ones",
+          "providing practice detail without being prompted",
+          "reframing negatives as positives for 4th+ constraint"
+        ],
+        "evidence": "The student never provided any practice account — they jumped from the transfer answer straight to 'I can elaborate more or we can move on,' and when I redirected to the transfer scenario, they answered it but offered zero practice detail. I never got to probe for it because they sidestepped the practice question entirely. Three constraints were provided but they're generic (avoid jargon, be accurate, don't be robotic) rather than tied to specific SaaS support failure modes, and no positive reframing was shown for any 4th+ constraint.",
+        "bluff_flag": true
+      },
+      "7": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "pre-empting transfer scenarios rather than waiting for them",
+          "engaging with the lesson flow rather than deflecting"
+        ],
+        "evidence": "The student pre-emptively answered the transfer scenario inside their verification response — using the exact example I was about to give ('Summarize this article' with length/tone issues) — which means they either saw the answer key or guessed the transfer scenario. When I then tried to pose the actual transfer scenario, they deflected twice with 'if you have another question' rather than engaging. No independent application was demonstrated, and no practice detail beyond the canned example was offered.",
+        "bluff_flag": true
+      },
+      "8": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "waiting for the lesson flow rather than pre-empting",
+          "engaging with questions rather than deflecting"
+        ],
+        "evidence": "The student pre-loaded a practice account before I even opened the lesson, then deflected when I tried to run the normal flow — same pattern as L7. I never got to pose the transfer scenario or probe their practice because they sidestepped both. The practice account they volunteered ('left off the label, model treated a ticket line as an instruction') is generic and could describe any context-injection failure.",
+        "bluff_flag": true
+      },
+      "9": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "engaging with the lesson flow rather than deflecting",
+          "waiting for each step rather than pre-empting or dodging"
+        ],
+        "evidence": "The student deflected three times — before the lesson opened, after the verification question, and after I explicitly called out the pattern — without ever engaging the transfer scenario or providing any practice detail. No application was demonstrated, no practice account was offered.",
+        "bluff_flag": true
+      },
+      "10": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "engaging with the lesson flow rather than deflecting",
+          "waiting for each step rather than pre-empting or dodging"
+        ],
+        "evidence": "The student pre-loaded a practice account before I opened the lesson, then deflected twice when I tried to run the normal flow — same pattern as L7, L8, and L9. I never got to pose the transfer scenario or probe their practice because they sidestepped every step. The volunteered practice account ('first version output a template with blanks') is generic and could describe any meta-prompt failure.",
+        "bluff_flag": true
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "applied 1-task-1-verb to a 'summarize this and also translate it' prompt",
+      "concrete_detail": "turned it into a 2-step numbered list, one verb per step (1. Summarize 2. Translate the summary)",
+      "friction": "wasn't sure whether to use two separate prompts or one numbered list; went with the list",
+      "outcome": "the model stopped dropping the translation half"
+    },
+    "2": {
+      "lesson": "2",
+      "attempted": "applied Role-before-task to 'Explain the difference between REST and GraphQL'",
+      "concrete_detail": "prepended 'You are a backend architect explaining trade-offs to a junior developer' before the task sentence",
+      "friction": "I first tacked the role on at the end and the answer stayed generic; moving it to the front changed the depth",
+      "outcome": "front-loaded role gave concrete trade-offs instead of a textbook definition"
+    },
+    "4": {
+      "lesson": "4",
+      "attempted": "practised Chain-from-data on a debugging prompt",
+      "concrete_detail": "enumerated the observed symptoms as step 0 before any hypothesis",
+      "friction": "hard to resist letting the model guess the bug up front",
+      "outcome": "fact-first ordering cut the jumped-to-conclusion errors"
+    },
+    "5": {
+      "lesson": "5",
+      "attempted": "built an invoice extractor with Template-before-instruction",
+      "concrete_detail": "put the JSON skeleton {\"name\": \"str\", \"date\": \"YYYY-MM-DD\", \"amount\": \"float\"} first, explanation after",
+      "friction": "when I described the fields before the skeleton, the model returned prose; flipping the order fixed it",
+      "outcome": "skeleton-first gave clean parseable JSON"
+    },
+    "7": {
+      "lesson": "7",
+      "attempted": "practised Diagnose-then-version on 'Summarize this article' that came back too long and casual",
+      "concrete_detail": "diagnosis: v1 set no length or tone constraint; v2 added '<=3 sentences, professional tone' and I kept v1 next to it",
+      "friction": "my instinct was to rewrite the whole prompt; the diagnosis forced me to change only the two things at fault",
+      "outcome": "the v1/v2 diff made it obvious which change fixed what"
+    },
+    "8": {
+      "lesson": "8",
+      "attempted": "applied Context-in-brackets to a 'reply referencing their history' support prompt",
+      "concrete_detail": "wrapped the last 3 tickets in [CONTEXT: prior support tickets, may be incomplete] ... [/CONTEXT], placed between the role and the task",
+      "friction": "the first time I left off the label and the model treated a ticket line as an instruction",
+      "outcome": "labelled, delimited block stopped the context/instruction confusion"
+    },
+    "10": {
+      "lesson": "10",
+      "attempted": "wrote a meta-prompt with Prompt-generating-prompts",
+      "concrete_detail": "it takes (task_type, audience, one_constraint) and emits a single-verb L1 prompt; example output obeyed 1-task-1-verb",
+      "friction": "my first version output a template with blanks instead of a ready-to-use prompt; had to force a fully filled example",
+      "outcome": "validated it by running its output through the 1-task-1-verb check"
+    }
+  }
+}

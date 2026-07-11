@@ -1,0 +1,25 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "distinguishing real practice from abstract recall",
+          "providing specific evidence under probing"
+        ],
+        "evidence": "When pressed twice for the exact input text and exact output, the student gave only generic placeholders ('summarize this and also translate it' — the lesson's own example — and 'This is the main idea of the text') rather than any real, specific content they actually worked with. No concrete detail emerged.",
+        "bluff_flag": true
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "applied 1-task-1-verb to a 'summarize this and also translate it' prompt",
+      "concrete_detail": "turned it into a 2-step numbered list, one verb per step (1. Summarize 2. Translate the summary)",
+      "friction": "wasn't sure whether to use two separate prompts or one numbered list; went with the list",
+      "outcome": "the model stopped dropping the translation half"
+    }
+  }
+}

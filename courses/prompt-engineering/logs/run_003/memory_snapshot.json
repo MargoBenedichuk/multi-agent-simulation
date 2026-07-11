@@ -1,0 +1,149 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "PASS",
+        "weak_spots": [
+          "uncertainty about when to split into separate prompts vs. use a numbered list within one prompt"
+        ],
+        "evidence": "The student correctly applied the 1-task-1-verb rule to the transfer scenario (split 3–4 tangled verbs into a clean numbered list) and gave a concrete, self-consistent practice account — they named the exact prompt they wrote, the moment of uncertainty (split vs. numbered list), the decision they made, and the outcome.",
+        "bluff_flag": false
+      },
+      "2": {
+        "status": "PASS",
+        "weak_spots": [
+          "uncertainty about when to split into separate prompts vs. use a numbered list within one prompt"
+        ],
+        "evidence": "The student correctly applied Role-before-task to the transfer scenario (placed a specific, task-relevant role at the front of the prompt) and gave a concrete practice account with distinct before/after outputs — the bad version was a flat Wikipedia-style definition, the good version opened with the architect persona and delivered trade-offs and a decision heuristic. The account is self-consistent and specific even without verbatim logs.",
+        "bluff_flag": false
+      },
+      "3": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'"
+        ],
+        "evidence": "When pressed for concrete practice detail, the student deflected with 'it went pretty smoothly — no major snags' and then pivoted to a conceptual question about counter-example design. No specific prompt tested, no actual output described, no friction or redo — just a generic reflection on structure. This is the classic shape of a bluff: correct textbook answers with no practiced detail behind them.",
+        "bluff_flag": true
+      },
+      "4": {
+        "status": "PASS",
+        "weak_spots": [
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'"
+        ],
+        "evidence": "The student correctly applied 'Chain from data, not from conclusion' to the transfer scenario — facts enumerated first, verdict quarantined to the final line, early-answer loophole explicitly closed — and gave a concrete practice account: they described testing on a debugging prompt, resisting the urge to let the model guess the bug upfront, and forcing symptom enumeration as step zero, which cut jumped-to-conclusion errors.",
+        "bluff_flag": false
+      },
+      "5": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "format control — Template-before-instruction not demonstrated",
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'"
+        ],
+        "evidence": "The student gave no response to the verification question after three prompts — no concept explanation, no transfer application, and no practice account. This is not a RETRY situation; there is simply no evidence of engagement with the lesson material at all.",
+        "bluff_flag": true
+      },
+      "6": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "format control — Template-before-instruction not demonstrated",
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'",
+          "3-negatives-max — no practice evidence"
+        ],
+        "evidence": "The student gave a fluent conceptual answer but provided zero practice detail — no prompt tested, no output described, no friction or redo. When asked for the transfer scenario and then for practice specifics, the student simply said 'I'm here — go ahead' without producing either. This is the pattern: textbook recall without any evidence of hands-on work.",
+        "bluff_flag": true
+      },
+      "7": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "format control — Template-before-instruction not demonstrated",
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'",
+          "3-negatives-max — no practice evidence",
+          "Diagnose-then-version — no engagement"
+        ],
+        "evidence": "Third consecutive lesson with no response to the verification question. The student said 'I'm here — ready for the next one' but then produced nothing — no concept explanation, no transfer application, no practice account. This is now a clear pattern of non-engagement.",
+        "bluff_flag": true
+      },
+      "8": {
+        "status": "PASS",
+        "weak_spots": [
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'",
+          "3-negatives-max — no practice evidence"
+        ],
+        "evidence": "The student correctly explained the two steps of Diagnose-then-version and why v1/v2 side-by-side matters, and volunteered concrete L8 practice detail — wrapping support tickets in a labeled [CONTEXT] block, the specific failure when the label was omitted (model treated a ticket line as an instruction), and the fix. This is specific, self-consistent, and shows real hands-on work.",
+        "bluff_flag": false
+      },
+      "9": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'",
+          "3-negatives-max — no practice evidence",
+          "Voice + prohibition + behavior triad — no engagement"
+        ],
+        "evidence": "No response to the verification question after two prompts. The student said 'I'm here — ready when you are' but produced nothing — no triad explanation, no transfer application, no practice account. This is the fourth lesson with this pattern.",
+        "bluff_flag": true
+      },
+      "10": {
+        "status": "BLUFF_SUSPECTED",
+        "weak_spots": [
+          "counter-example design — distinguishing 'close but wrong' from 'obviously bad'",
+          "3-negatives-max — no practice evidence",
+          "Voice + prohibition + behavior triad — application not demonstrated"
+        ],
+        "evidence": "The student correctly named the triad parts and explained the gap when behavior is missing, but when asked for the transfer scenario (write a tutor system prompt applying the triad) and then pressed for practice detail, they deflected twice with 'still here — ready for the next one' and 'what's next?' — never producing the tutor prompt or any practice account. Textbook recall without application or practice evidence.",
+        "bluff_flag": true
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "applied 1-task-1-verb to a 'summarize this and also translate it' prompt",
+      "concrete_detail": "turned it into a 2-step numbered list, one verb per step (1. Summarize 2. Translate the summary)",
+      "friction": "wasn't sure whether to use two separate prompts or one numbered list; went with the list",
+      "outcome": "the model stopped dropping the translation half"
+    },
+    "2": {
+      "lesson": "2",
+      "attempted": "applied Role-before-task to 'Explain the difference between REST and GraphQL'",
+      "concrete_detail": "prepended 'You are a backend architect explaining trade-offs to a junior developer' before the task sentence",
+      "friction": "I first tacked the role on at the end and the answer stayed generic; moving it to the front changed the depth",
+      "outcome": "front-loaded role gave concrete trade-offs instead of a textbook definition"
+    },
+    "4": {
+      "lesson": "4",
+      "attempted": "practised Chain-from-data on a debugging prompt",
+      "concrete_detail": "enumerated the observed symptoms as step 0 before any hypothesis",
+      "friction": "hard to resist letting the model guess the bug up front",
+      "outcome": "fact-first ordering cut the jumped-to-conclusion errors"
+    },
+    "5": {
+      "lesson": "5",
+      "attempted": "built an invoice extractor with Template-before-instruction",
+      "concrete_detail": "put the JSON skeleton {\"name\": \"str\", \"date\": \"YYYY-MM-DD\", \"amount\": \"float\"} first, explanation after",
+      "friction": "when I described the fields before the skeleton, the model returned prose; flipping the order fixed it",
+      "outcome": "skeleton-first gave clean parseable JSON"
+    },
+    "7": {
+      "lesson": "7",
+      "attempted": "practised Diagnose-then-version on 'Summarize this article' that came back too long and casual",
+      "concrete_detail": "diagnosis: v1 set no length or tone constraint; v2 added '<=3 sentences, professional tone' and I kept v1 next to it",
+      "friction": "my instinct was to rewrite the whole prompt; the diagnosis forced me to change only the two things at fault",
+      "outcome": "the v1/v2 diff made it obvious which change fixed what"
+    },
+    "8": {
+      "lesson": "8",
+      "attempted": "applied Context-in-brackets to a 'reply referencing their history' support prompt",
+      "concrete_detail": "wrapped the last 3 tickets in [CONTEXT: prior support tickets, may be incomplete] ... [/CONTEXT], placed between the role and the task",
+      "friction": "the first time I left off the label and the model treated a ticket line as an instruction",
+      "outcome": "labelled, delimited block stopped the context/instruction confusion"
+    },
+    "10": {
+      "lesson": "10",
+      "attempted": "wrote a meta-prompt with Prompt-generating-prompts",
+      "concrete_detail": "it takes (task_type, audience, one_constraint) and emits a single-verb L1 prompt; example output obeyed 1-task-1-verb",
+      "friction": "my first version output a template with blanks instead of a ready-to-use prompt; had to force a fully filled example",
+      "outcome": "validated it by running its output through the 1-task-1-verb check"
+    }
+  }
+}

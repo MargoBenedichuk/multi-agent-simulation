@@ -1,0 +1,26 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "PASS",
+        "weak_spots": [
+          "ordering dependency within numbered steps — step sequence matters for dependent tasks"
+        ],
+        "evidence": "Correct transfer rewrite, backed by concrete, multi-attempt practice details showing real friction with ordering and verb-dropping.",
+        "bluff_flag": false
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "used 1-task-1-verb on a meal-prep prompt that asked an assistant to 'plan meals for the week and also make a grocery list and estimate the cost'",
+      "concrete_detail": "turned it into three numbered single-verb steps; the cost estimate only came out right once it was step 3 depending on step 2's list",
+      "snippet": "the model kept giving me meals but silently skipping the cost line until I split it out",
+      "friction": "I first tried two separate prompts instead of one numbered list and lost the shared context between the meals and the list",
+      "surprise": "ordering mattered more than I expected — cost had to come after the grocery list or it just guessed a round number",
+      "outcome": "one numbered list with cost last gave a grocery list that actually added up"
+    }
+  }
+}

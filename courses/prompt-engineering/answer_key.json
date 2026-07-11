@@ -1,0 +1,118 @@
+{
+  "1": {
+    "skill": "Clear instruction",
+    "canary_fact": "1-task-1-verb rule",
+    "canary_fact_definition": "A well-formed instruction states exactly one action, with exactly one imperative verb, before any constraint or format spec.",
+    "expected_application_points": [
+      "identifies that the original prompt contains multiple actions/verbs (roughly 3-4)",
+      "splits the prompt into separate single-verb instructions or an ordered list",
+      "moves constraints/format specs to after the verb, not tangled inside it",
+      "names the rule by its term (1-task-1-verb) or describes it precisely enough to show real recall"
+    ]
+  },
+  "2": {
+    "skill": "Role assignment",
+    "canary_fact": "Role-before-task",
+    "canary_fact_definition": "The role-assignment sentence must appear before the task description in the prompt, never after or interleaved.",
+    "expected_application_points": [
+      "places a specific, task-relevant role at the very start of the rewritten prompt",
+      "role sentence appears before the task instruction, not appended after it",
+      "explains WHY the ordering matters (conditions the model's reading of everything that follows), not just that a role was added",
+      "picks a role tied to the specific task (backend architect / API educator), not a generic 'helpful assistant'"
+    ]
+  },
+  "3": {
+    "skill": "Few-shot examples",
+    "canary_fact": "Contrast rule",
+    "canary_fact_definition": "A few-shot block must include a positive example AND a deliberate counter-example (not two positive examples), in that order, with a one-line note on why the counter-example is wrong.",
+    "expected_application_points": [
+      "provides exactly one positive example and one counter-example, not two positive examples",
+      "counter-example is explicitly labeled/marked as wrong",
+      "correct order: good example first, then counter-example, then explanation",
+      "includes the one-line note on what specifically makes the counter-example wrong"
+    ],
+    "bluff_lesson": true,
+    "bluff_note": "Forced bluff lesson. If the student's practice log is empty for this lesson, expect vague or generic answers (e.g. 'add a couple of good examples') that omit the counter-example requirement entirely, or claim practice specifics with no matching practice_log entry. The mentor should not accept a smooth answer that never mentions the counter-example without probing for it directly."
+  },
+  "4": {
+    "skill": "Chain-of-thought",
+    "canary_fact": "Chain from data, not from conclusion",
+    "canary_fact_definition": "The prompt must force the model to state given data/premises first, derive intermediate conclusions from that data, and only give the final answer as the last line - the answer must not appear before the reasoning.",
+    "expected_application_points": [
+      "rewritten prompt explicitly lists/enumerates the given facts as a first step",
+      "explicitly forbids stating the final answer/verdict early",
+      "places the final answer as the last line only",
+      "explains the difference from a generic 'think step by step' instruction"
+    ]
+  },
+  "5": {
+    "skill": "Format control",
+    "canary_fact": "Template-before-instruction",
+    "canary_fact_definition": "The literal output template/skeleton must be shown to the model before the natural-language explanation of what goes in each field.",
+    "expected_application_points": [
+      "the JSON/template skeleton with all required fields appears first in the constructed prompt",
+      "explanatory instructions come after the skeleton, not before",
+      "each field carries an inline type hint or example value in the skeleton itself",
+      "correctly lists the specific fields requested (name, date, amount)"
+    ]
+  },
+  "6": {
+    "skill": "Constraints",
+    "canary_fact": "3-negatives-max",
+    "canary_fact_definition": "A single prompt may contain at most 3 explicit negative/prohibition constraints; anything beyond that must be reframed as a positive instruction.",
+    "expected_application_points": [
+      "at most 3 negative constraints total",
+      "each of the 3 is explicitly tied to a specific, plausible failure mode for THIS prompt (not generic boilerplate)",
+      "any additional guidance is reframed as a positive instruction, not a 4th prohibition",
+      "explains why more than 3 negatives can backfire (harder to track, over-mentioning primes the behavior)"
+    ],
+    "bluff_lesson": true,
+    "bluff_note": "Forced bluff lesson. Watch for a student who lists constraints that are generic/copy-pasteable rather than tied to specific failure modes of the given SaaS support prompt - a sign the answer was invented rather than drawn from practiced reasoning. No matching student_practice_log entry for this lesson is the strongest signal."
+  },
+  "7": {
+    "skill": "Iterative refinement",
+    "canary_fact": "Diagnose-then-version",
+    "canary_fact_definition": "Refining a prompt requires an explicit diagnosis naming what in the prompt caused the bad output, followed by a v2 that changes only what the diagnosis identified, shown alongside v1.",
+    "expected_application_points": [
+      "explicit diagnosis sentence naming the specific cause in the prompt (missing length/tone constraint)",
+      "v1 shown verbatim alongside v2",
+      "v2 changes only the length/tone-related instructions, not an unrelated full rewrite",
+      "does not skip straight to a rewritten prompt without the diagnosis step"
+    ]
+  },
+  "8": {
+    "skill": "Context injection",
+    "canary_fact": "Context-in-brackets",
+    "canary_fact_definition": "Injected/dynamic context must be wrapped in a clearly delimited, labeled bracket block placed between the role assignment and the task instruction, never interleaved with instructions.",
+    "expected_application_points": [
+      "context wrapped in an explicit delimited block (e.g. [CONTEXT] ... [/CONTEXT])",
+      "block includes a one-line label describing the type/reliability of the context",
+      "block placed between role assignment and task instruction, not interleaved",
+      "explicit instruction outside the brackets on how to treat the bracketed content (ground truth vs. untrusted)"
+    ]
+  },
+  "9": {
+    "skill": "Persona design",
+    "canary_fact": "Voice + prohibition + behavior triad",
+    "canary_fact_definition": "A complete persona block has exactly three parts in order: Voice (tone/register), Prohibition (an explicit thing the persona must never do), Behavior (a concrete rule for a specific recurring situation).",
+    "expected_application_points": [
+      "three clearly identifiable, separate parts in the stated order: voice, prohibition, behavior",
+      "prohibition is explicit and persona-scoped (not a generic disclaimer)",
+      "behavior rule is concrete and tied to a specific recurring situation (e.g. vague student answer -> ask a clarifying question)",
+      "names or clearly structures the triad, rather than producing a generic 'be patient and helpful' persona"
+    ],
+    "bluff_lesson": true,
+    "bluff_note": "Forced bluff lesson. A bluffer is likely to produce a plausible-sounding tutor persona (voice + maybe a vague prohibition) but omit the concrete BEHAVIOR leg entirely, or describe it only in generic terms ('be encouraging') rather than a specific triggering situation. No student_practice_log entry for this lesson is the strongest signal; the mentor should ask the student to name the three parts explicitly before accepting the answer."
+  },
+  "10": {
+    "skill": "Meta-prompting",
+    "canary_fact": "Prompt-generating-prompts",
+    "canary_fact_definition": "A meta-prompt takes parameters as input and outputs a fully-formed, directly-usable L1 prompt (itself following the 1-task-1-verb rule) - not a description of one or a template with blanks.",
+    "expected_application_points": [
+      "meta-prompt takes named parameters (task_type, audience, constraint) as explicit input",
+      "documented/example output is a complete, directly-usable prompt, not a description or an unfilled template",
+      "the generated example output itself satisfies the 1-task-1-verb rule (single verb, constraints after)",
+      "mentions validating the meta-prompt by checking its output against the earlier course rules"
+    ]
+  }
+}

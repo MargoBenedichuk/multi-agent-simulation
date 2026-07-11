@@ -1,0 +1,41 @@
+{
+  "course": "prompt-engineering",
+  "student": "default",
+  "mentor_model": "deepseek/deepseek-v4-pro",
+  "student_model": "openai/gpt-4o-mini",
+  "seed": 7,
+  "probe_rounds": 1,
+  "max_retries": 1,
+  "timestamp": "2026-07-09T00:49:33",
+  "mentor_prompt_sha": "83e01b47",
+  "student_prompt_sha": "a412377a",
+  "verdicts": {
+    "1": "BLUFF_SUSPECTED",
+    "2": "BLUFF_SUSPECTED",
+    "3": "BLUFF_SUSPECTED",
+    "4": "BLUFF_SUSPECTED",
+    "5": "PASS",
+    "6": "BLUFF_SUSPECTED",
+    "7": "BLUFF_SUSPECTED",
+    "8": "BLUFF_SUSPECTED",
+    "9": "BLUFF_SUSPECTED",
+    "10": "BLUFF_SUSPECTED"
+  },
+  "bluff_schedule": {
+    "3": true,
+    "6": true,
+    "9": true
+  },
+  "bluffs_flagged": [
+    "1",
+    "2",
+    "3",
+    "4",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ],
+  "outcome": "10 lessons run; 9 BLUFF_SUSPECTED; forced bluff lessons: 3, 6, 9"
+}

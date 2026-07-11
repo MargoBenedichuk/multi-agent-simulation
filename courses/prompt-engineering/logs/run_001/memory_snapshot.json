@@ -1,0 +1,24 @@
+{
+  "mentor_ledger": {
+    "student": "default",
+    "lessons": {
+      "1": {
+        "status": "PASS",
+        "weak_spots": [
+          "deciding between numbered list vs. separate prompts for multi-step tasks"
+        ],
+        "evidence": "Applied the 1-task-1-verb rule correctly to the transfer scenario with a clean three-step split, and backed it with a concrete practice account — a specific failure (translation dropped), a specific fix (numbered list), and a real moment of hesitation (list vs. separate prompts).",
+        "bluff_flag": false
+      }
+    }
+  },
+  "student_practice_log": {
+    "1": {
+      "lesson": "1",
+      "attempted": "applied 1-task-1-verb to a 'summarize this and also translate it' prompt",
+      "concrete_detail": "turned it into a 2-step numbered list, one verb per step (1. Summarize 2. Translate the summary)",
+      "friction": "wasn't sure whether to use two separate prompts or one numbered list; went with the list",
+      "outcome": "the model stopped dropping the translation half"
+    }
+  }
+}

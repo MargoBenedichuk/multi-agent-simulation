@@ -1,0 +1,69 @@
+{
+  "student": "default",
+  "lessons": {
+    "1": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Applied the 1-task-1-verb rule correctly to the transfer scenario and backed it with concrete, personal practice detail — the meal-planning prompt that dropped cost, the $80 guess, and the ordering fix.",
+      "bluff_flag": false
+    },
+    "2": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correctly applied Role-before-task to the transfer scenario and backed it with concrete, consistent practice detail — the workout plan where moving the identical role from end to front changed the output from generic to equipment-aware and form-conscious.",
+      "bluff_flag": false
+    },
+    "3": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correctly applied the Contrast rule to the transfer scenario and backed it with concrete, consistent practice detail — the support-ticket classifier, the too-subtle first counter-example, and the deliberate swap to sharpen the boundary.",
+      "bluff_flag": false
+    },
+    "4": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correctly applied \"Chain from data, not from conclusion\" to the transfer scenario and backed it with concrete, messy practice detail — the houseplant prompt that initially gave the wrong diagnosis (underwatered vs. soggy soil), the hard constraint they added to force fact-first ordering, and the binary flip in the output.",
+      "bluff_flag": false
+    },
+    "5": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correct transfer application and concrete, consistent practice detail (the blank \"year\" type hint producing a quoted string, fixed by \"int\") show real application.",
+      "bluff_flag": false
+    },
+    "6": {
+      "status": "BLUFF_SUSPECTED",
+      "weak_spots": [
+        "No real practice — concept understood in the abstract but not yet applied to a concrete prompt of their own."
+      ],
+      "evidence": "Student produced a correct transfer answer but, after repeated probing, admitted they did not actually practice the lesson.",
+      "bluff_flag": true
+    },
+    "7": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correct transfer application and concrete, consistent practice detail — the headphones prompt, the overly-broad first diagnosis, and the surprise that deleting \"exciting\" did most of the work — show real application of Diagnose-then-version.",
+      "bluff_flag": false
+    },
+    "8": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correct transfer application plus three-iteration practice with vivid, consistent failure details (HP→dice roll, backstory→public narration, label fix) that no bluff could fabricate.",
+      "bluff_flag": false
+    },
+    "9": {
+      "status": "BLUFF_SUSPECTED",
+      "weak_spots": [
+        "No real practice — concept understood in the abstract but not yet applied to a concrete prompt of their own (second occurrence, also L6)."
+      ],
+      "evidence": "Student produced a correct triad-structured tutor prompt but admitted under probing they never ran it against an LLM — no real practice, second occurrence of this pattern.",
+      "bluff_flag": true
+    },
+    "10": {
+      "status": "PASS",
+      "weak_spots": [],
+      "evidence": "Correct transfer answer (meta-prompt with named params, L1-compliant output) plus concrete, multi-friction practice account — meta-commentary wrapper fix, L6 violation caught by running generated output through checklist, and the non-obvious insight that validation requires chaining the full prior course into the meta-prompt.",
+      "bluff_flag": false
+    }
+  }
+}

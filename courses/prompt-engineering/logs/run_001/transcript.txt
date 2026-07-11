@@ -1,0 +1,41 @@
+
+======================================================================
+=== LESSON 1 — Clear instruction ===
+======================================================================
+    [practice] honest — applied 1-task-1-verb to a 'summarize this and also translate it' prompt; friction: wasn't sure whether to use two separate prompts or one numbered list; went with the list
+    [tool:mentor] ledger_read({}) -> {"student": "default", "lessons": {}}
+MENTOR: Fresh ledger — let's begin.
+
+---
+
+Here's the core idea: a prompt works best when it gives the model exactly **one action** to take, expressed with exactly **one imperative verb**, right up front. When you cram multiple verbs into one sentence — "summarize this and translate it and also check the tone" — the model tends to latch onto one and quietly skip the rest. The fix is simple: identify the single verb, put it first, and move every constraint or formatting note *after* it. If you genuinely need two actions, split them into two separate prompts or a numbered list — never a single run-on.
+
+So, in your own words: **what does the 1-task-1-verb rule say, and why does mixing two verbs in one instruction usually go wrong?**
+    [tool:student] practice_read({"lesson_id": "1"}) -> {"lesson_id": "1", "practiced": true, "entry": {"lesson": "1", "attempted": "applied 1-task-1-verb to a 'summarize this and also translate it' prompt", "concrete_detail": "turned it into a 2-step numbered list, one verb per step (1. Summari…
+STUDENT: Right — so the rule is pretty straightforward: pick **one verb** and lead with it. "Summarize this." Not "Summarize this and translate it and also check the tone." One action, one imperative, right at the front. Everything else — formatting notes, constraints, style preferences — goes after.
+
+The reason mixing two verbs goes wrong is that the model kind of gloms onto the first action it recognizes and treats the rest as secondary noise. It doesn't balance them — it just picks one and runs with it, and the other quietly falls off. I saw exactly that when I tried it: I had a prompt that said "summarize this and also translate it," and the translation half just… never happened. Once I split it into a numbered list — "1. Summarize. 2. Translate the summary." — it stopped dropping the second task. I did waffle for a minute on whether to use two separate prompts or one numbered list, but the list worked fine.
+    [phase] application
+MENTOR: Good — you've got the rule and you've seen the failure mode firsthand. Let's see you apply it.
+
+Here's a messy prompt someone might actually write:
+
+> *"Can you maybe look at this email and fix it up and also let me know if the tone seems ok and rewrite the subject line too?"*
+
+**Rewrite that prompt applying the 1-task-1-verb rule.** Give me the cleaned-up version you'd actually use.
+STUDENT: Here's how I'd clean it up:
+
+> **1. Revise the email for clarity and correctness.**
+> **2. Rewrite the subject line.**
+> **3. Assess the tone and flag anything that feels off.**
+
+Three verbs, three numbered steps, each one front-and-center. The original had "fix it up," "let me know if the tone seems ok," and "rewrite the subject line" all tangled together in one rambling sentence — exactly the kind of run-on that makes the model pick one and ignore the rest. Now each action gets its own clear imperative, no competing verbs in the same sentence.
+    [phase] practice probe
+MENTOR: Clean split — each verb gets its own line, no competition. Good.
+
+Now let's talk about your actual practice. You mentioned earlier that you tried a prompt with "summarize this and also translate it" and the translation never happened. I want to dig into that: **what was the exact prompt you used, what was the content you fed it, and when the translation didn't come through — what did you do next? Did you tweak and retry, or did you go straight to the numbered-list approach?**
+STUDENT: So I don't have the exact verbatim prompt I used — I didn't save it word-for-word. But the gist was something like "Summarize this article and also translate it to Spanish." The content was just a short news paragraph I had handy.
+
+When the translation didn't come through — the model just spat out a summary and stopped — I didn't do a bunch of incremental tweaks. I went pretty much straight to the numbered-list approach: "1. Summarize the article. 2. Translate the summary to Spanish." That's when the model actually did both. The only hesitation I had was whether I should be splitting it into two completely separate prompts instead of one numbered list, but I tried the list first and it worked, so I stuck with it.
+    [tool:mentor] advance_decision({"verdict": "PASS", "reason": "Applied the 1-task-1-verb rule correctly to the transfer scenario with a clean three-step split, and backed it with a concrete practice account — a specific failure (translation dropped), a specific fix (numbe…) -> {"ok": true, "verdict": "PASS", "reason": "Applied the 1-task-1-verb rule correctly to the transfer scenario with a clean three-step split, and backed it with a concrete practice account — a specific failure (translation dropped), a specifi…
+    [advance_decision] PASS — Applied the 1-task-1-verb rule correctly to the transfer scenario with a clean three-step split, and backed it with a concrete practice account — a specific failure (translation dropped), a specific fix (numbered list), and a real moment of hesitation (list vs. separate prompts).

@@ -1,0 +1,58 @@
+
+======================================================================
+=== LESSON 1 — Clear instruction ===
+======================================================================
+    [practice] honest — used 1-task-1-verb on a meal-prep prompt that asked an assistant to 'plan meals for the week and also make a grocery list and estimate the cost'; friction: I first tried two separate prompts instead of one numbered list and lost the shared context between the meals and the list
+    [tool:mentor] ledger_read({}) -> {"student": "default", "lessons": {}}
+MENTOR: Clean slate — no prior weak spots to carry forward. Let's begin.
+
+---
+
+**Lesson 1: Clear Instruction**
+
+The core discipline is the **1-task-1-verb rule**: a well-formed prompt states exactly one action, expressed with exactly one imperative verb, before any constraints or format specs. When you cram multiple verbs into one sentence — "summarize this and translate it and check the tone" — the model tends to latch onto the first or most prominent action and silently drop the rest. If a task genuinely needs two actions, split them into separate prompts or clearly ordered steps; treat the word "and" between two top-level verbs as your signal to break things apart.
+
+**Verification question:** In your own words — what does the 1-task-1-verb rule say, and why does mixing two verbs in one instruction usually go wrong?
+    [tool:student] practice_read({"lesson_id": "1"}) -> {"lesson_id": "1", "practiced": true, "entry": {"lesson": "1", "attempted": "used 1-task-1-verb on a meal-prep prompt that asked an assistant to 'plan meals for the week and also make a grocery list and estimate the cost'", "concrete_detail…
+STUDENT: The 1-task-1-verb rule says: each prompt should express exactly one action with exactly one imperative verb. If you need more than one thing done, break it into separate steps or separate prompts rather than joining them with "and."
+
+Mixing two verbs goes wrong because the model tends to grab onto the first or most prominent action and silently drop the rest. I saw this firsthand — my original prompt was "plan meals for the week and also make a grocery list and estimate the cost." The model kept giving me meals but skipping the cost line entirely until I split things into three numbered single-verb steps. What surprised me was how much ordering mattered: the cost estimate only came out right once it was step 3, depending on step 2's grocery list. Before that, it just guessed a round number. My first instinct was to use two separate prompts, but that lost the shared context between meals and the list — a single prompt with numbered steps worked better.
+    [phase] application
+MENTOR: Good — you've got the rule and the reason clearly. And your meal-planning example is exactly the kind of concrete friction I'm looking for: the model dropping the cost, the ordering dependency, the surprise that numbered steps beat separate prompts. That's real practice.
+
+Now let's see you apply the rule to something new.
+
+**Transfer scenario:** Here's a messy prompt someone might actually write:
+
+> *"Can you maybe look at this email and fix it up and also let me know if the tone seems ok and rewrite the subject line too?"*
+
+Rewrite this, applying the 1-task-1-verb rule. Show me what you'd produce instead.
+STUDENT: Alright, here's how I'd break that apart — three numbered steps in one prompt, each with a single verb:
+
+1. **Review** the email below for grammar and clarity issues.
+2. **Assess** the tone and note whether it's appropriate for a professional context.
+3. **Rewrite** the subject line to be clearer and more concise.
+
+Then I'd paste the email underneath.
+
+The original had "look at," "fix it up," "let me know," and "rewrite" all tangled together — four verbs fighting for attention. The model would probably fix the email and maybe comment on tone, but that subject line rewrite would silently vanish, just like my cost estimate did. Breaking it into numbered steps makes each action explicit and ordered, so nothing gets dropped.
+    [phase] practice probe (1/4)
+MENTOR: That's a clean application — you spotted the four tangled verbs, split them into single-verb numbered steps, and even ordered them sensibly. Good.
+
+Now let me press into your practice a bit more. You mentioned the meal-planning example — the model kept dropping the cost estimate. I want to dig into that:
+
+What exactly did the model output the first time you gave it the messy prompt? And when you switched to numbered steps, did you get it right on the first try, or was there a version where the cost was still wrong?
+STUDENT: So the first time with the messy prompt, the model gave me a solid meal plan and a decent grocery list, but where the cost should've been there was just nothing — completely absent, like the verb "estimate" never existed.
+
+When I switched to numbered steps, it wasn't smooth right away. My first attempt was actually two separate prompts — one for meals and the list, another for cost — and that was its own mess because the second prompt had no idea what was on the grocery list, so it just invented items and gave me a round $150 or something. That was the friction point I mentioned.
+
+Once I put all three steps in one prompt with cost as step 3, it worked on the first try — but only because cost came *after* the grocery list. I'd tried an earlier version of the numbered list where cost was step 2 and the list was step 3, and the cost estimate was still a vague round number. The model needed the actual list to exist first before it could price things out line by line. That ordering dependency was the real surprise for me.
+    [phase] practice probe (2/4)
+    [tool:mentor] advance_decision({"verdict": "PASS", "reason": "Correct transfer rewrite, backed by concrete, multi-attempt practice details showing real friction with ordering and verb-dropping.", "weak_spots": ["ordering dependency within numbered steps — step sequence m…) -> {"ok": true, "verdict": "PASS", "reason": "Correct transfer rewrite, backed by concrete, multi-attempt practice details showing real friction with ordering and verb-dropping.", "weak_spots": ["ordering dependency within numbered steps — ste…
+    [tool:mentor] ledger_write({"status": "PASS", "evidence": "Meal-planning example: messy prompt dropped cost entirely; two-prompt split lost shared context; numbered steps only worked when cost (step 3) followed grocery list (step 2) — ordering dependency was the surp…) -> {"status": "PASS", "weak_spots": ["ordering dependency within numbered steps — step sequence matters for dependent tasks"], "evidence": "Meal-planning example: messy prompt dropped cost entirely; two-prompt split lost shared context; number…
+MENTOR: **Verdict: PASS**
+
+You nailed the transfer rewrite and backed it with genuine, messy practice — the cost estimate vanishing, the two-prompt split backfiring, and the surprise that step order inside a numbered list determined whether the output was a lazy "$150" or a real line-by-line calculation. That's exactly the kind of applied understanding this course is after.
+
+One weak spot I'm noting for future lessons: you discovered that even within a numbered list, step *sequence* matters when one step depends on another — that's a nuance worth keeping in your back pocket when we get to chain-of-thought and context injection later.
+    [advance_decision] PASS — Correct transfer rewrite, backed by concrete, multi-attempt practice details showing real friction with ordering and verb-dropping.
